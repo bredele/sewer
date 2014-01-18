@@ -7,7 +7,6 @@
      detach = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
      prefix = attach !== 'addEventListener' ? 'on' : '';
 
-
 /**
  * Matches query selection.
  * 
@@ -39,11 +38,11 @@ function matches(el, target, selector) {
  	    topic = phrase.shift(),
  	    selector = phrase.join(' ');
 
+  //TODO: do that globally?
  	var cb = function(ev) {
- 		if(!selector || matches(el, ev.target || ev.srcElement, selector)) {
- 			var target = ev.target || ev.srcElement,
- 			    code = filter[1] && filter[1].replace(/ /g,'');
-
+ 		var target = ev.target || ev.srcElement;
+ 		if(!selector || matches(el, target, selector)) {
+ 			var code = filter[1] && filter[1].replace(/ /g,'');
  			if(!code || ev.keyCode.toString() === code) fn(target, ev);
  		}
  	};
