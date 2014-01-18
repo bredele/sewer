@@ -5,7 +5,23 @@
 	<title>Filter listener</title>
 </head>
 <body>
+	<h4>Simple filter listener (enter - keyCode 13)</h4>
 	<input type="text">
+	<h4>Delegate filter listener (enter student input - keyCode 13)</h4>
+	<ul>
+		<li>
+			teacher
+			<input type="text" class="teacher"></li>
+		<li>
+			student
+			<input type="text" class="student"></li>
+		<li>
+			teacher
+			<input type="text" class="teacher"></li>
+		<li>
+			student
+			<input type="text" class="student"></li>						
+	</ul>
 	<script src="../build/build.js"></script>
 	<script>
 	  var events = require('events'),
@@ -13,6 +29,10 @@
 
 	  events.bind(input, 'keypress > 13', function() {
 	  	alert('enter');
+	  });
+
+	  events.bind(document.body, 'keypress input.student > 13', function() {
+	  	alert('student enter');
 	  });
 	</script>
 </body>

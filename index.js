@@ -26,15 +26,16 @@ function matches(el, target, selector) {
 
  	if(selector) {
  		el[attach](prefix + topic, function(ev) {
- 			var target = ev.target || ev.srcElement;
+ 			var target = ev.target || ev.srcElement,
+ 			 		code = filter[1] && filter[1].replace(/ /g,'');
  			if(matches(el, target, selector)) {
- 				fn(target, ev); //is it the order right?
+ 				if(!code || ev.keyCode.toString() === code) fn(target, ev); //is it the order right?
  			}
  		}, capture === true);
  	} else {
  		el[attach](prefix + topic, function(ev){
  			var target = ev.target || ev.srcElement,
- 			    code = filter[1].replace(/ /g,'');
+ 			    code = filter[1] && filter[1].replace(/ /g,'');
 
  			if(!code || ev.keyCode.toString() === code) fn(target, ev);
  		}, capture === true);
