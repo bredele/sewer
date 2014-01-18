@@ -23,11 +23,11 @@
 	  var events = require('events'),
 	      list = document.querySelector('.list');
 
-	  var handler = events.listen(list, 'click .student', function() {
+	  var handler = events.attach(list, 'click .student', function() {
 	  	alert('student');
 	  });
 
-	  events.listen(document.querySelector('.remove'), 'click',function() {
+	  events.attach(document.querySelector('.remove'), 'click',function() {
 	  	events.detach(list, handler[0], handler[1]);
 	  });
 

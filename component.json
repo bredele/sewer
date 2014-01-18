@@ -1,7 +1,7 @@
 {
-  "name": "events",
-  "repo": "bredele/events",
-  "description": "Events handler",
+  "name": "event",
+  "repo": "bredele/event",
+  "description": "Event handler",
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {},

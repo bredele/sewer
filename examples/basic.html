@@ -17,11 +17,11 @@
 	  var events = require('events'),
 	      btn = document.querySelector('button');
 
-	  var handler = events.listen(btn, 'click', function() {
+	  var handler = events.attach(btn, 'click', function() {
 	  	alert('click');
 	  });
 
-	  events.listen(document.querySelector('.remove'), 'click', function() {
+	  events.attach(document.querySelector('.remove'), 'click', function() {
 	  	events.detach(btn, handler[0], handler[1]);
 	  });
 	</script>
