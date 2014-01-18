@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Basic listener</title>
+	<title>Filter listener</title>
 </head>
 <body>
 	<input type="text">
@@ -11,7 +11,7 @@
 	  var events = require('events'),
 	      input = document.querySelector('input');
 
-	  events.bind(input, 'krypress > 13', function() {
+	  events.bind(input, 'keypress > 13', function() {
 	  	alert('enter');
 	  });
 	</script>
