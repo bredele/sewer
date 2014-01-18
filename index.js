@@ -18,7 +18,7 @@ function matches(el, target, selector) {
  * @return {[type]} [description]
  */
 
- exports.bind = function(el, str, fn, capture) {
+ exports.listen = function(el, str, fn, capture) {
  	var filter = str.split('>');
  	var phrase = filter[0].split(' '),
  			topic = phrase.shift(),
@@ -31,13 +31,18 @@ function matches(el, target, selector) {
  			if(matches(el, target, selector)) {
  				if(!code || ev.keyCode.toString() === code) fn(target, ev); //is it the order right?
  			}
- 		}, capture === true);
+ 		}, capture || false);
  	} else {
  		el[attach](prefix + topic, function(ev){
  			var target = ev.target || ev.srcElement,
  			    code = filter[1] && filter[1].replace(/ /g,'');
 
  			if(!code || ev.keyCode.toString() === code) fn(target, ev);
- 		}, capture === true);
+ 		}, capture || false);
  	}
+ };
+
+
+ exports.detach = function(el, str, fn, capture) {
+ 	el[detach](prefix + str, fn, capture || false);
  };

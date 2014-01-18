@@ -27,11 +27,11 @@
 	  var events = require('events'),
 	      input = document.querySelector('input');
 
-	  events.bind(input, 'keypress > 13', function() {
+	  events.listen(input, 'keypress > 13', function() {
 	  	alert('enter');
 	  });
 
-	  events.bind(document.body, 'keypress input.student > 13', function() {
+	  events.listen(document.body, 'keypress input.student > 13', function() {
 	  	alert('student enter');
 	  });
 	</script>

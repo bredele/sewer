@@ -16,7 +16,7 @@
 	<script>
 	  var events = require('events');
 
-	  events.bind(document.querySelector('.list'), 'click .student', function() {
+	  events.listen(document.querySelector('.list'), 'click .student', function() {
 	  	alert('student');
 	  });
 	</script>

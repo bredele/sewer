@@ -10,7 +10,7 @@
 	<script>
 	  var events = require('events');
 
-	  events.bind(document.querySelector('button'), 'click', function() {
+	  events.listen(document.querySelector('button'), 'click', function() {
 	  	alert('click');
 	  });
 	</script>
