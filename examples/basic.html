@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Basic listener</title>
+</head>
+<body>
+	<button>Click</button>
+	<script src="../build/build.js"></script>
+	<script>
+	  var events = require('events');
+
+	  events.bind(document.querySelector('button'), 'click', function() {
+	  	alert('click');
+	  });
+	</script>
+</body>
+</html>

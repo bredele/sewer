@@ -1,20 +1,40 @@
+
+/**
+ * Polyfill
+ */
+
 var attach = window.addEventListener ? 'addEventListener' : 'attachEvent',
     detach = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
-    prefix = listen !== 'addEventListener' ? 'on' : '';
+    prefix = attach !== 'addEventListener' ? 'on' : '';
 
 
-/**
- * Expose 'Events'
- */
-
-module.exports = Events;
-
-
-/**
- * Events constructor.
- * @api public
- */
-
-function Events() {
-  //do something
+function matches(el, target, selector) {
+	//refactor with maple (childnodes indexof)
+	return [].slice.call(el.querySelectorAll(selector)).indexOf(target) > -1;
 }
+
+/**
+ * [bind description]
+ * @return {[type]} [description]
+ */
+
+ exports.bind = function(el, str, fn, capture) {
+ 	var filter = str.split('>');
+ 	var phrase = filter[0].split(' '),
+ 			topic = phrase.shift(),
+ 			selector = phrase.join(' ');
+
+ 	if(selector) {
+ 		el[attach](prefix + topic, function(ev) {
+ 			var target = ev.target || ev.srcElement;
+ 			if(matches(el, target, selector)) {
+ 				fn(target, ev); //is it the order right?
+ 			}
+ 		}, capture === true);
+ 	} else {
+ 		el[attach](prefix + topic, function(ev){
+ 			var target = ev.target || ev.srcElement;
+ 			fn(target, ev);
+ 		}, capture === true);
+ 	}
+ };

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Basic listener</title>
+</head>
+<body>
+	<input type="text">
+	<script src="../build/build.js"></script>
+	<script>
+	  var events = require('events'),
+	      input = document.querySelector('input');
+
+	  events.bind(input, 'krypress > 13', function() {
+	  	alert('enter');
+	  });
+	</script>
+</body>
+</html>
