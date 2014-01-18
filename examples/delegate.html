@@ -3,8 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Basic listener</title>
+	<style>
+	  .remove {
+	  	float:right;
+	  }
+	</style>
 </head>
 <body>
+	<button class="remove">remove listener</button>
 	<h4>Student delegation</h4>
 	<ul class="list">
 		<li class="teacher">teacher</li>
@@ -14,11 +20,19 @@
 	</ul>
 	<script src="../build/build.js"></script>
 	<script>
-	  var events = require('events');
+	  var events = require('events'),
+	      list = document.querySelector('.list');
 
-	  events.listen(document.querySelector('.list'), 'click .student', function() {
+	  var handler = events.listen(list, 'click .student', function() {
 	  	alert('student');
 	  });
+
+	  events.listen(document.querySelector('.remove'), 'click',function() {
+	  	events.detach(list, handler[0], handler[1]);
+	  });
+
+
+
 	</script>
 </body>
 </html>

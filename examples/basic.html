@@ -3,15 +3,26 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Basic listener</title>
+	<style>
+	  .remove {
+	  	float:right;
+	  }
+	</style>
 </head>
 <body>
 	<button>Click</button>
+	<button class="remove">remove listener</button>
 	<script src="../build/build.js"></script>
 	<script>
-	  var events = require('events');
+	  var events = require('events'),
+	      btn = document.querySelector('button');
 
-	  events.listen(document.querySelector('button'), 'click', function() {
+	  var handler = events.listen(btn, 'click', function() {
 	  	alert('click');
+	  });
+
+	  events.listen(document.querySelector('.remove'), 'click', function() {
+	  	events.detach(btn, handler[0], handler[1]);
 	  });
 	</script>
 </body>

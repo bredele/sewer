@@ -3,8 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Filter listener</title>
+	<style>
+	  .remove {
+	  	float:right;
+	  }
+	</style>
 </head>
 <body>
+	<button class="remove">remove listener</button>
 	<h4>Simple filter listener (enter - keyCode 13)</h4>
 	<input type="text">
 	<h4>Delegate filter listener (enter student input - keyCode 13)</h4>
@@ -27,12 +33,18 @@
 	  var events = require('events'),
 	      input = document.querySelector('input');
 
-	  events.listen(input, 'keypress > 13', function() {
+	  var handlerInput = events.listen(input, 'keypress > 13', function() {
 	  	alert('enter');
 	  });
 
-	  events.listen(document.body, 'keypress input.student > 13', function() {
+	  var handlerBody = events.listen(document.body, 'keypress input.student > 13', function() {
 	  	alert('student enter');
+	  });
+
+
+	  events.listen(document.querySelector('.remove'), 'click',function() {
+	  	events.detach(input, handlerInput[0], handlerInput[1]);
+	  	events.detach(document.body, handlerBody[0], handlerBody[1]);	  	
 	  });
 	</script>
 </body>
