@@ -11,7 +11,7 @@
 
 ## Usage
 
-See [article](http://bredele.github.io/event)
+See [article](http://bredele.github.io/events)
 
 ## API
 
