@@ -1,7 +1,7 @@
 
 # event
 
-  Event handler with delegation and filtering engine.
+  Cross browser event handler with delegation and filtering engine.
 
 ## Installation
 
