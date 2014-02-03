@@ -33,18 +33,18 @@
 	  var events = require('event'),
 	      input = document.querySelector('input');
 
-	  var handlerInput = events.attach(input, 'keypress > 13', function() {
+	  var handlerInput = events(input, 'keypress > 13', function() {
 	  	alert('enter');
 	  });
 
-	  var handlerBody = events.attach(document.body, 'keypress input.student > 13', function() {
+	  var handlerBody = events(document.body, 'keypress input.student > 13', function() {
 	  	alert('student enter');
 	  });
 
 
-	  events.attach(document.querySelector('.remove'), 'click',function() {
-	  	events.detach(input, handlerInput[0], handlerInput[1]);
-	  	events.detach(document.body, handlerBody[0], handlerBody[1]);	  	
+	  events(document.querySelector('.remove'), 'click',function() {
+	  	events.off(input, handlerInput[0], handlerInput[1]);
+	  	events.off(document.body, handlerBody[0], handlerBody[1]);	  	
 	  });
 	</script>
 </body>

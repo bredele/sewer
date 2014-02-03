@@ -3,9 +3,9 @@
  * Polyfill
  */
 
- var attach = window.addEventListener ? 'addEventListener' : 'attachEvent',
-     detach = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
-     prefix = attach !== 'addEventListener' ? 'on' : '';
+var attach = window.addEventListener ? 'addEventListener' : 'attachEvent',
+		detach = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
+		prefix = attach !== 'addEventListener' ? 'on' : '';
 
 /**
  * Matches query selection.
@@ -16,10 +16,14 @@
  * @return {Boolean}  true if the element would be selected by the 
  * specified selector string
  */
+
 function matches(el, target, selector) {
 	//refactor with maple (childnodes indexof)
 	return [].slice.call(el.querySelectorAll(selector)).indexOf(target) > -1;
 }
+
+
+module.exports = event;
 
 
 /**
@@ -32,24 +36,24 @@ function matches(el, target, selector) {
  * @return {Array} handler to detach event      
  */
 
-exports.attach = function(el, str, fn, capture) {
- 	var filter = str.split('>'),
- 	    phrase = filter[0].split(' '),
- 	    topic = phrase.shift(),
- 	    selector = phrase.join(' ');
+function event(el, str, fn, capture) {
+	var filter = str.split('>'),
+			phrase = filter[0].split(' '),
+			topic = phrase.shift(),
+			selector = phrase.join(' ');
 
-  //TODO: do that globally?
- 	var cb = function(ev) {
- 		var target = ev.target || ev.srcElement;
- 		if(!selector || matches(el, target, selector)) {
- 			var code = filter[1] && filter[1].replace(/ /g,'');
- 			if(!code || ev.keyCode.toString() === code) fn(target, ev);
- 		}
- 	};
+	//TODO: do that globally?
+	var cb = function(ev) {
+		var target = ev.target || ev.srcElement;
+		if(!selector || matches(el, target, selector)) {
+			var code = filter[1] && filter[1].replace(/ /g,'');
+			if(!code || ev.keyCode.toString() === code) fn(target, ev);
+		}
+	};
 
-  el[attach](prefix + topic, cb, capture || false);
- 	return [topic, cb, capture];
- };
+	el[attach](prefix + topic, cb, capture || false);
+	return [topic, cb, capture];
+}
 
 
 /**
@@ -61,6 +65,6 @@ exports.attach = function(el, str, fn, capture) {
  * @param  {Boolean}   capture   
  */
 
- exports.detach = function(el, str, fn, capture) {
- 	el[detach](prefix + str, fn, capture || false);
- };
+event.off = function(el, str, fn, capture) {
+	el[detach](prefix + str, fn, capture || false);
+};
