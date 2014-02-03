@@ -46,6 +46,8 @@ bind(input, 'keypress > 13', function() {
 });
 ```
 
+Returns an array (topic, callback, capture) in case you want to remove the listener.
+
 ### .off(el, topic, callback, capture)
 
  Remove an event listener.
