@@ -11,47 +11,50 @@
 
 ## Usage
 
-### Attach and remove event listener
+See [article](http://bredele.github.io/event)
+
+## API
+
+### event(el, str, callback, capture)
+
+  Add an event listener.
 
 ```js
-var events = require('event'),
-    btn = document.querySelector('button');
+var bind = require('event');
 
-//attach
-var handler = events(btn, 'click', function(ev, target) {
-	//do something
-});
-
-//detach
-events.off(btn, handler[0], handler[1]);
-
-```
-
-
-### Delegate event
-
-
-```js
-var list = document.querySelector('ul');
-
-events(list, 'click li.clickable', function(ev, target) {
-	//do something only when a li with the class clickable is clicked
+bind(document.body, 'click', function() {
+  //do something
 });
 ```
 
+  Delegate events.
 
-### Filter event
+```js
+bind(document.body, 'click button.clickable', function() {
+  //do something only when buttons with the 
+  //class clickable are clicked
+});
+```
+
+  Filter events.
 
 ```js
 var input = document.querySelector('input');
 
-events(input, 'keypress > 13', function(ev, target) {
-	//do something
+bind(input, 'keypress > 13', function() {
+  //do something only on enter
 });
-
 ```
 
+### .off(el, topic, callback, capture)
+
+ Remove an event listener.
+
+```js
+bind.off(document.body,'click', fn);
+```
 
 ## License
 
   MIT
+
