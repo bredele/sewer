@@ -14,16 +14,16 @@
 ### Attach and remove event listener
 
 ```js
-var event = require('event'),
+var events = require('event'),
     btn = document.querySelector('button');
 
 //attach
-var handler = event.attach(btn, 'click', function(ev, target) {
+var handler = events(btn, 'click', function(ev, target) {
 	//do something
 });
 
 //detach
-event.detach(btn, handler[0], handler[1]);
+events.off(btn, handler[0], handler[1]);
 
 ```
 
@@ -32,10 +32,9 @@ event.detach(btn, handler[0], handler[1]);
 
 
 ```js
-var event = require('event'),
-    list = document.querySelector('ul');
+var list = document.querySelector('ul');
 
-event.attach(list, 'click li.clickable', function(ev, target) {
+events(list, 'click li.clickable', function(ev, target) {
 	//do something only when a li with the class clickable is clicked
 });
 ```
@@ -44,10 +43,9 @@ event.attach(list, 'click li.clickable', function(ev, target) {
 ### Filter event
 
 ```js
-var event = require('event'),
-    input = document.querySelector('input');
+var input = document.querySelector('input');
 
-event.attach(input, 'keypress > 13', function(ev, target) {
+events(input, 'keypress > 13', function(ev, target) {
 	//do something
 });
 
