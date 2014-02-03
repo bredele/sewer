@@ -30,7 +30,7 @@
 	</ul>
 	<script src="../build/build.js"></script>
 	<script>
-	  var events = require('events'),
+	  var events = require('event'),
 	      input = document.querySelector('input');
 
 	  var handlerInput = events.attach(input, 'keypress > 13', function() {
