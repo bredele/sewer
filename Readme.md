@@ -22,10 +22,11 @@ See [article](http://bredele.github.io/events)
 ```js
 var bind = require('event');
 
-bind(document.body, 'click', function() {
+bind(document.body, 'click', function(ev, target) {
   //do something
 });
 ```
+The second argument of the callback is the element (cross browser target) that trigerred the event.
 
   Delegate events.
 
