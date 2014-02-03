@@ -32,7 +32,7 @@ function matches(el, target, selector) {
  * @return {Array} handler to detach event      
  */
 
- exports.attach = function(el, str, fn, capture) {
+exports.attach = function(el, str, fn, capture) {
  	var filter = str.split('>'),
  	    phrase = filter[0].split(' '),
  	    topic = phrase.shift(),
