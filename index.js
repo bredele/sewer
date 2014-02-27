@@ -5,7 +5,8 @@
 
 var attach = window.addEventListener ? 'addEventListener' : 'attachEvent',
 		detach = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
-		prefix = attach !== 'addEventListener' ? 'on' : '';
+		prefix = attach !== 'addEventListener' ? 'on' : '',
+		indexOf = require('indexof');
 
 /**
  * Matches query selection.
@@ -18,8 +19,7 @@ var attach = window.addEventListener ? 'addEventListener' : 'attachEvent',
  */
 
 function matches(el, target, selector) {
-	//refactor with maple (childnodes indexof)
-	return [].slice.call(el.querySelectorAll(selector)).indexOf(target) > -1;
+	return indexOf([].slice.call(el.querySelectorAll(selector)), target) > -1 ;
 }
 
 

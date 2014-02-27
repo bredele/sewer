@@ -4,9 +4,11 @@
   "description": "Event handler",
   "version": "0.0.1",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "component/indexof": "*"
+  },
   "development": {
-    "component/assert" : "*"
+    "component/assert": "*"
   },
   "license": "MIT",
   "main": "index.js",
