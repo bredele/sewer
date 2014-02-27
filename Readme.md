@@ -1,13 +1,16 @@
-
 # event
 
   Cross browser event handler with delegation and filtering engine.
 
 ## Installation
 
-  Install with [component](http://component.io):
+with [component](http://component.io):
 
     $ component install bredele/event
+
+with [nodejs](http://nodejs.org/):
+
+    $ npm install event-bredele
 
 ## Usage
 

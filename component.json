@@ -8,7 +8,6 @@
     "component/indexof": "*"
   },
   "development": {
-    "component/assert": "*"
   },
   "license": "MIT",
   "main": "index.js",
