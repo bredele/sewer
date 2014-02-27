@@ -1,0 +1,26 @@
+{
+  "name": "event-bredele",
+  "version": "0.0.1",
+  "description": "Cross browser event handler component with delegation and filtering engine",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bredele/event.git"
+  },
+  "keywords": [
+    "event",
+    "delegation",
+    "bubbling",
+    "prevent",
+    "filtering",
+    "events"
+  ],
+  "author": "Olivier Wietrich <olivier.wietrich@gmail.com> (http://github.com/bredele)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bredele/event/issues"
+  },
+  "dependencies": {
+    "indexof": "0.0.1"
+  }
+}
