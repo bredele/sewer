@@ -79,12 +79,6 @@ function map(key) {
   return touch ? keys[key] : key;
 }
 
-function chain() {
-  var result;
-  for(var i = 0, l = arguments.length; i < l; i ++) {
-
-  }
-}
 
 /**
  * Attach Event Listener.
@@ -121,7 +115,6 @@ event.bind = function(el, str, fn) {
       result = args[i](result);
     }
   };
-  //var cb = thunk(el, filter, selector, fn);
   el[attach](prefix + map(topic), cb, capture);
   return [topic, cb, capture];
 };

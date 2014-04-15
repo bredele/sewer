@@ -1,6 +1,13 @@
 # event
 
-  Cross browser event handler with delegation and filtering engine.
+  Cross browser event handler with some cool features such as:
+    - cross browser target element
+    - automatic touch mapping
+    - delegation
+    - chaining
+    - filtering
+
+  See [article](http://bredele.github.io/events)
 
 ## Installation
 
@@ -14,7 +21,80 @@ with [nodejs](http://nodejs.org/):
 
 ## Usage
 
-See [article](http://bredele.github.io/events)
+```js
+var ev = require('event');
+
+ev.bind(document.body, 'click', function(target, event) {
+  // do something
+});
+```
+
+  See [API](#api) for more details.
+
+### Delegation 
+
+ Delegate events with query selection. In the example above, the callback
+ is executed only when a `button` with the className `clickable` is
+ clicked.
+
+```js
+ev.bind(document.body, 'click button.clickable', function() {
+  //do something only when buttons with the 
+  //class clickable are clicked
+});
+```
+
+### Touch events
+
+  Touch events are automatically mapped with desktop/mouse events. It is great because
+  your implementation doesn't depend on the device and at the end you'll have one code that works everywhere.
+
+```js
+ev.bind(el, 'click', function(target, event) {
+  // do something on touch end
+});
+```
+
+  In this example the callback is executed on `touchend` if you are on a mobile device
+  and on `click` otherwise.
+
+```
+click => touchend
+mouseup => touchend
+mousedown => touchstart
+mousemove => touchmove
+```
+
+### Chaining
+
+  A code which depends on the event is hard to reuse or maintain. A good practice
+  is to dissociate the event manipulation from the real logic:
+
+```js
+ev.bind(el, 'click', fn1, fn2);
+
+function fn1(target, e) {
+  e.preventDefault();
+  return target.innerHTML;
+}
+
+function fn2(str) {
+  //do something on target innerHTML
+}
+```
+
+### Filtering
+
+  Filter events with key code. In the example above, the callback is executed
+  only when `enter` is pressed.
+
+```js
+var input = document.querySelector('input');
+
+ev.bind(input, 'keypress > 13', function() {
+  //do something only on enter
+});
+
 
 ## API
 
@@ -23,41 +103,22 @@ See [article](http://bredele.github.io/events)
   Add an event listener.
 
 ```js
-var bind = require('event');
-
-bind(document.body, 'click', function(ev, target) {
+ev.bind(document.body, 'click', function(target, ev) {
   //do something
 });
 ```
-The second argument of the callback is the element (cross browser target) that trigerred the event.
+The first argument of the callback is the element (cross browser target) that trigerred the event.
 
-  Delegate events.
 
-```js
-bind(document.body, 'click button.clickable', function() {
-  //do something only when buttons with the 
-  //class clickable are clicked
-});
-```
+`bind` returns an array (topic, callback, capture) in case you want to remove the listener.
 
-  Filter events.
 
-```js
-var input = document.querySelector('input');
-
-bind(input, 'keypress > 13', function() {
-  //do something only on enter
-});
-```
-
-Returns an array (topic, callback, capture) in case you want to remove the listener.
-
-### .off(el, topic, callback, capture)
+### .unbind(el, topic, callback, capture)
 
  Remove an event listener.
 
 ```js
-bind.off(document.body,'click', fn);
+ev.unbind(document.body,'click', fn);
 ```
 
 ## License
