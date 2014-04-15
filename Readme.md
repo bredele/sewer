@@ -1,6 +1,7 @@
 # event
 
   Cross browser event handler with some cool features such as:
+
     - cross browser target element
     - automatic touch mapping
     - delegation
