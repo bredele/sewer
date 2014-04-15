@@ -30,21 +30,21 @@
 	</ul>
 	<script src="../build/build.js"></script>
 	<script>
-	  var events = require('event'),
+	  var ev = require('event'),
 	      input = document.querySelector('input');
 
-	  var handlerInput = events(input, 'keypress > 13', function() {
+	  var handlerInput = ev.bind(input, 'keypress > 13', function() {
 	  	alert('enter');
 	  });
 
-	  var handlerBody = events(document.body, 'keypress input.student > 13', function() {
+	  var handlerBody = ev.bind(document.body, 'keypress input.student > 13', function() {
 	  	alert('student enter');
 	  });
 
 
-	  events(document.querySelector('.remove'), 'click',function() {
-	  	events.off(input, handlerInput[0], handlerInput[1]);
-	  	events.off(document.body, handlerBody[0], handlerBody[1]);	  	
+	  ev.bind(document.querySelector('.remove'), 'click',function() {
+	  	ev.unbind(input, handlerInput[0], handlerInput[1]);
+	  	ev.unbind(document.body, handlerBody[0], handlerBody[1]);	  	
 	  });
 	</script>
 </body>

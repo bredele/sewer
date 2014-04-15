@@ -20,15 +20,15 @@
 	</ul>
 	<script src="../build/build.js"></script>
 	<script>
-	  var events = require('event'),
+	  var ev = require('event'),
 	      list = document.querySelector('.list');
 
-	  var handler = events(list, 'click .student', function() {
+	  var handler = ev.bind(list, 'click .student', function() {
 	  	alert('student');
 	  });
 
-	  events(document.querySelector('.remove'), 'click',function() {
-	  	events.off(list, handler[0], handler[1]);
+	  ev.bind(document.querySelector('.remove'), 'click',function() {
+	  	ev.unbind(list, handler[0], handler[1]);
 	  });
 
 

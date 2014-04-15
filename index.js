@@ -1,12 +1,26 @@
 
 /**
+ * Module dependencies.
+ */
+
+var indexOf = require('indexof');
+
+
+/**
  * Polyfill
  */
 
-var attach = window.addEventListener ? 'addEventListener' : 'attachEvent',
-		detach = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
-		prefix = attach !== 'addEventListener' ? 'on' : '',
-		indexOf = require('indexof');
+var attach = window.addEventListener ? 'addEventListener' : 'attachEvent';
+var detach = window.removeEventListener ? 'removeEventListener' : 'detachEvent';
+var prefix = attach !== 'addEventListener' ? 'on' : '';
+
+
+/**
+ * Expose 'events'
+ */
+
+var event = module.exports = {};
+
 
 /**
  * Matches query selection.
@@ -19,11 +33,31 @@ var attach = window.addEventListener ? 'addEventListener' : 'attachEvent',
  */
 
 function matches(el, target, selector) {
-	return indexOf([].slice.call(el.querySelectorAll(selector)), target) > -1 ;
+  return indexOf([].slice.call(el.querySelectorAll(selector)), target) > -1 ;
 }
 
 
-module.exports = event;
+/**
+ * Thunkify listener callback.
+ *
+ * Consolidate target element and parse
+ * first argument to matches query selection.
+ * 
+ * @param  {String}   str 
+ * @param  {Function} fn
+ * @return {Function}
+ * @api private
+ */
+
+function thunk(el, filter, selector, fn) {
+  return function(ev) {
+    var target = ev.target || ev.srcElement;
+    if(!selector || matches(el, target, selector)) {
+      var code = filter[1] && filter[1].replace(/ /g,'');
+      if(!code || ev.keyCode.toString() === code) fn(target, ev);
+    }
+  };
+}
 
 
 /**
@@ -36,24 +70,16 @@ module.exports = event;
  * @return {Array} handler to detach event      
  */
 
-function event(el, str, fn, capture) {
-	var filter = str.split('>'),
-			phrase = filter[0].split(' '),
-			topic = phrase.shift(),
-			selector = phrase.join(' ');
-
-	//TODO: do that globally?
-	var cb = function(ev) {
-		var target = ev.target || ev.srcElement;
-		if(!selector || matches(el, target, selector)) {
-			var code = filter[1] && filter[1].replace(/ /g,'');
-			if(!code || ev.keyCode.toString() === code) fn(target, ev);
-		}
-	};
-
-	el[attach](prefix + topic, cb, capture || false);
-	return [topic, cb, capture];
-}
+event.attach = 
+event.bind = function(el, str, fn, capture) {
+  var filter = str.split('>');
+  var phrase = filter[0].split(' ');
+  var topic = phrase.shift();
+  var selector = phrase.join(' ');
+  var cb = thunk(el, filter, selector, fn);
+  el[attach](prefix + topic, cb, capture || false);
+  return [topic, cb, capture];
+};
 
 
 /**
@@ -65,6 +91,7 @@ function event(el, str, fn, capture) {
  * @param  {Boolean}   capture   
  */
 
-event.off = function(el, str, fn, capture) {
-	el[detach](prefix + str, fn, capture || false);
+event.detach = 
+event.unbind = function(el, str, fn, capture) {
+  el[detach](prefix + str, fn, capture || false);
 };

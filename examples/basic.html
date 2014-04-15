@@ -14,15 +14,15 @@
 	<button class="remove">remove listener</button>
 	<script src="../build/build.js"></script>
 	<script>
-	  var events = require('event'),
+	  var ev = require('event'),
 	      btn = document.querySelector('button');
 
-	  var handler = events(btn, 'click', function() {
+	  var handler = ev.bind(btn, 'click', function() {
 	  	alert('click');
 	  });
 
-	  events(document.querySelector('.remove'), 'click', function() {
-	  	events.off(btn, handler[0], handler[1]);
+	  ev.bind(document.querySelector('.remove'), 'click', function() {
+	  	ev.unbind(btn, handler[0], handler[1]);
 	  });
 	</script>
 </body>
