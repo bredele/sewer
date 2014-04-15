@@ -7,6 +7,7 @@
    - chaining
    - filtering
 
+
   See [article](http://bredele.github.io/events)
 
 ## Installation
