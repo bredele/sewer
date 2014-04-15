@@ -13,6 +13,14 @@ var indexOf = require('indexof');
 var attach = window.addEventListener ? 'addEventListener' : 'attachEvent';
 var detach = window.removeEventListener ? 'removeEventListener' : 'detachEvent';
 var prefix = attach !== 'addEventListener' ? 'on' : '';
+var touch = (window.ontouchstart !== undefined);
+var keys = {
+  'click' : 'touchend',
+  'mousedown' : 'touchstart',
+  'mouseup' : 'touchend',
+  'mousemove' : 'touchmove'
+};
+
 
 
 /**
@@ -60,6 +68,11 @@ function thunk(el, filter, selector, fn) {
 }
 
 
+function map(key) {
+  return touch ? keys[key] : key;
+}
+
+
 /**
  * Attach Event Listener.
  * 
@@ -77,7 +90,7 @@ event.bind = function(el, str, fn, capture) {
   var topic = phrase.shift();
   var selector = phrase.join(' ');
   var cb = thunk(el, filter, selector, fn);
-  el[attach](prefix + topic, cb, capture || false);
+  el[attach](prefix + map(topic), cb, capture || false);
   return [topic, cb, capture];
 };
 
@@ -93,5 +106,5 @@ event.bind = function(el, str, fn, capture) {
 
 event.detach = 
 event.unbind = function(el, str, fn, capture) {
-  el[detach](prefix + str, fn, capture || false);
+  el[detach](prefix + map(str), fn, capture || false);
 };
