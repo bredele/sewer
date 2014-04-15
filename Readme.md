@@ -1,12 +1,11 @@
 # event
 
   Cross browser event handler with some cool features such as:
-
-    - cross browser target element
-    - automatic touch mapping
-    - delegation
-    - chaining
-    - filtering
+   - cross browser target element
+   - automatic touch mapping
+   - delegation
+   - chaining
+   - filtering
 
   See [article](http://bredele.github.io/events)
 
@@ -95,7 +94,7 @@ var input = document.querySelector('input');
 ev.bind(input, 'keypress > 13', function() {
   //do something only on enter
 });
-
+```
 
 ## API
 
