@@ -62,19 +62,38 @@ function thunk(el, filter, selector, fn) {
     var target = ev.target || ev.srcElement;
     if(!selector || matches(el, target, selector)) {
       var code = filter[1] && filter[1].replace(/ /g,'');
-      if(!code || ev.keyCode.toString() === code) fn(target, ev);
+      if(!code || ev.keyCode.toString() === code) return fn(target, ev);
     }
   };
 }
 
 
+/**
+ * Map with touch events (only if touch friendly).
+ * 
+ * @param  {String} key 
+ * @return {String}
+ * @api private
+ */
 function map(key) {
   return touch ? keys[key] : key;
 }
 
+function chain() {
+  var result;
+  for(var i = 0, l = arguments.length; i < l; i ++) {
+
+  }
+}
 
 /**
  * Attach Event Listener.
+ *
+ * Examples:
+ *
+ *   event.bind(el, 'click .clickable', function() {
+ *     //do something
+ *   });
  * 
  * @param  {HTMLElement}   el
  * @param  {String}   str
@@ -84,13 +103,26 @@ function map(key) {
  */
 
 event.attach = 
-event.bind = function(el, str, fn, capture) {
+event.bind = function(el, str, fn) {
+  var args = [].slice.call(arguments, 3);
+  var l = args.length - 1;
+  var capture = false;
+  if(typeof args[l] === 'boolean') {
+    capture = args[l];
+    l = l - 1;
+  }
   var filter = str.split('>');
   var phrase = filter[0].split(' ');
   var topic = phrase.shift();
   var selector = phrase.join(' ');
-  var cb = thunk(el, filter, selector, fn);
-  el[attach](prefix + map(topic), cb, capture || false);
+  var cb = function(ev) {
+    var result = thunk(el, filter, selector, fn)(ev);
+    for(var i = 0; i <= l; i ++) {
+      result = args[i](result);
+    }
+  };
+  //var cb = thunk(el, filter, selector, fn);
+  el[attach](prefix + map(topic), cb, capture);
   return [topic, cb, capture];
 };
 
