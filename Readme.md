@@ -96,9 +96,9 @@ ev.bind(input, 'keypress > 13', function() {
 
 ## API
 
-### event(el, str, callback, capture)
+### .bind(el, str, callback, capture)
 
-  Add an event listener.
+  Add an event listener (alias `attach`).
 
 ```js
 ev.bind(document.body, 'click', function(target, ev) {
@@ -113,7 +113,7 @@ The first argument of the callback is the element (cross browser target) that tr
 
 ### .unbind(el, topic, callback, capture)
 
- Remove an event listener.
+ Remove an event listener (alias `detach`).
 
 ```js
 ev.unbind(document.body,'click', fn);
