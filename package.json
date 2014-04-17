@@ -1,11 +1,11 @@
 {
-  "name": "event-bredele",
-  "version": "0.0.1",
-  "description": "Cross browser event handler component with delegation and filtering engine",
+  "name": "sewer",
+  "version": "0.1.0",
+  "description": "Cross browser and device event handler with delegation, chaining and filtering engines",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/bredele/event.git"
+    "url": "git://github.com/bredele/sewer.git"
   },
   "keywords": [
     "event",
@@ -18,7 +18,7 @@
   "author": "Olivier Wietrich <olivier.wietrich@gmail.com> (http://github.com/bredele)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bredele/event/issues"
+    "url": "https://github.com/bredele/sewer/issues"
   },
   "dependencies": {
     "indexof": "0.0.1"

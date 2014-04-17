@@ -24,10 +24,10 @@ var keys = {
 
 
 /**
- * Expose 'events'
+ * Expose 'sewer'
  */
 
-var event = module.exports = {};
+var sewer = module.exports = {};
 
 
 /**
@@ -85,7 +85,7 @@ function map(key) {
  *
  * Examples:
  *
- *   event.bind(el, 'click .clickable', function() {
+ *   sewer.bind(el, 'click .clickable', function() {
  *     //do something
  *   });
  * 
@@ -96,8 +96,8 @@ function map(key) {
  * @return {Array} handler to detach event      
  */
 
-event.attach = 
-event.bind = function(el, str, fn) {
+sewer.attach = 
+sewer.bind = function(el, str, fn) {
   var args = [].slice.call(arguments, 3);
   var l = args.length - 1;
   var capture = false;
@@ -129,7 +129,7 @@ event.bind = function(el, str, fn) {
  * @param  {Boolean}   capture   
  */
 
-event.detach = 
-event.unbind = function(el, str, fn, capture) {
+sewer.detach = 
+sewer.unbind = function(el, str, fn, capture) {
   el[detach](prefix + map(str), fn, capture || false);
 };

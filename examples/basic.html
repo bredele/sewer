@@ -14,7 +14,7 @@
 	<button class="remove">remove listener</button>
 	<script src="../build/build.js"></script>
 	<script>
-	  var ev = require('event'),
+	  var ev = require('sewer'),
 	      btn = document.querySelector('button');
 
 	  var handler = ev.bind(btn, 'click', function() {
