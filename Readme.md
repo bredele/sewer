@@ -1,6 +1,8 @@
-# event
+# Sewer
 
-  Cross browser event handler with some cool features such as:
+  Sewer will help you dealing with all the crap needed to handle dom events.
+
+  Sewer is cross browser and provides some cool features such as:
    - cross browser target element
    - automatic touch mapping
    - delegation
@@ -11,16 +13,19 @@
 
 with [component](http://component.io):
 
-    $ component install bredele/event
+    $ component install bredele/sewer
 
 with [nodejs](http://nodejs.org/):
 
-    $ npm install event-bredele
+    $ npm install sewer
+
+Sewer is small and do one thing, listening dom events. It encourages composition and is already used in some
+projects such as **[brick](http://github.com/bredele/brick)** or **[wall](http://github.com/bredele/wall)**. 
 
 ## Usage
 
 ```js
-var ev = require('event');
+var ev = require('sewer');
 
 ev.bind(document.body, 'click', function(target, event) {
   // do something
