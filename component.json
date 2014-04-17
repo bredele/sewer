@@ -2,13 +2,12 @@
   "name": "sewer",
   "repo": "bredele/sewer",
   "description": "Cross browser and device event handler with delegation, chaining and filtering engines",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [],
   "dependencies": {
     "component/indexof": "*"
   },
-  "development": {
-  },
+  "development": {},
   "license": "MIT",
   "main": "index.js",
   "scripts": [
